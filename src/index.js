@@ -1,12 +1,7 @@
 import _ from "lodash";
 import "./style.css";
+import { taskManager } from "./taskManager";
 
-function component() {
-    const element = document.createElement("div");
+console.log("webpack enabled");
 
-    element.innerHTML = _.join(["Hello", "webpack"], " ");
-
-    return element;
-}
-
-document.body.appendChild(component());
+taskManager.createTask("test", "description", "never", "high");
