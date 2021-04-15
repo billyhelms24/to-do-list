@@ -1,1 +1,0 @@
-(()=>{"use strict";let t=[];const s=(s,e,i,o)=>new class{constructor(s,e,i,o){this.title=s,this.desc=e,this.dueDate=i,this.priority=o,t.push(this),console.log(t)}}(s,e,i,o);s("Grocery","Buy food for the week","4/14/21",3),s("Gas","Put gas in vehicle","4/14/21",3)})();

@@ -1,3 +1,0 @@
-let taskList = [];
-
-export { taskList };
