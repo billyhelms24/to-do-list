@@ -6,6 +6,7 @@ module.exports = {
     entry: {
         index: "./src/index.js",
         taskManager: "./src/taskManager.js",
+        displayController: "./src/displayController.js",
     },
     devtool: "inline-source-map",
     devServer: {
