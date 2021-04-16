@@ -67,11 +67,11 @@ const displayController = (() => {
         taskPriority.textContent = task.priority;
         cardFooter.appendChild(taskPriority);
 
-        const deleteTask = document.createElement("a");
-        deleteTask.classList.add("card-footer-item");
-        deleteTask.classList.add("task-delete-btn");
-        deleteTask.textContent = "Delete";
-        cardFooter.appendChild(deleteTask);
+        const taskDelete = document.createElement("a");
+        taskDelete.classList.add("card-footer-item");
+        taskDelete.classList.add("task-delete-btn");
+        taskDelete.textContent = "Delete";
+        cardFooter.appendChild(taskDelete);
 
         card.appendChild(cardFooter);
 
