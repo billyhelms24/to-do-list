@@ -1,5 +1,11 @@
+import { displayController } from "./displayController.js";
+
 const taskManager = (() => {
     let taskLibrary = [];
+
+    const getTaskLibrary = () => {
+        return taskLibrary;
+    };
 
     class Task {
         constructor(title, desc, dueDate, priority, project) {
@@ -13,6 +19,8 @@ const taskManager = (() => {
                 this.project = "default";
             }
             taskLibrary.push(this);
+            displayController.clearTasks();
+            displayController.renderTasks();
             console.log(taskLibrary);
         }
     }
@@ -21,7 +29,22 @@ const taskManager = (() => {
         new Task(title, desc, dueDate, priority);
     };
 
-    return { createTask };
+    const deleteTask = (e) => {
+        const card = e.target.closest("div");
+        taskLibrary.forEach((task) => {
+            if (
+                card.querySelector(".card-header-title").innerHTML ===
+                task.title
+            ) {
+                taskLibrary.splice(task, 1);
+                console.log(taskLibrary);
+            }
+        });
+        displayController.clearTasks();
+        displayController.renderTasks();
+    };
+
+    return { createTask, deleteTask, getTaskLibrary };
 })();
 
 export { taskManager };
