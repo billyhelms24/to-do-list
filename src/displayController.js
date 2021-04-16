@@ -1,5 +1,3 @@
-import { taskManager } from "./taskManager.js";
-
 const displayController = (() => {
     const body = document.querySelector("body");
 
@@ -24,8 +22,7 @@ const displayController = (() => {
         });
     };
 
-    const renderTasks = () => {
-        const tasks = taskManager.getTaskLibrary();
+    const renderTasks = (tasks) => {
         tasks.forEach((task) => renderTask(task));
     };
 
@@ -77,12 +74,6 @@ const displayController = (() => {
         cardFooter.appendChild(deleteTask);
 
         card.appendChild(cardFooter);
-
-        card.addEventListener("click", (e) => {
-            if (e.target.closest("a").classList.contains("task-delete-btn")) {
-                taskManager.deleteTask(e);
-            }
-        });
 
         column.appendChild(card);
         columns.appendChild(column);

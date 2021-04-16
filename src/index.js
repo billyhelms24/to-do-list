@@ -1,7 +1,7 @@
 import _ from "lodash";
 import "./bulma.css";
-import { displayController } from "./displayController";
 import "./style.css";
+import { displayController } from "./displayController";
 import { taskManager } from "./taskManager";
 
 console.log("webpack enabled");
@@ -32,3 +32,5 @@ taskManager.createTask(
     "5/22/21",
     "low"
 );
+
+displayController.renderTasks(taskManager.getTaskLibrary());

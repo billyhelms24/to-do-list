@@ -1,5 +1,3 @@
-import { displayController } from "./displayController.js";
-
 const taskManager = (() => {
     let taskLibrary = [];
 
@@ -19,8 +17,6 @@ const taskManager = (() => {
                 this.project = "default";
             }
             taskLibrary.push(this);
-            displayController.clearTasks();
-            displayController.renderTasks();
             console.log(taskLibrary);
         }
     }
@@ -40,8 +36,6 @@ const taskManager = (() => {
                 console.log(taskLibrary);
             }
         });
-        displayController.clearTasks();
-        displayController.renderTasks();
     };
 
     return { createTask, deleteTask, getTaskLibrary };
