@@ -1,37 +1,35 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    mode: "development",
-    entry: {
-        index: "./src/index.js",
-        taskManager: "./src/taskManager.js",
-        displayController: "./src/displayController.js",
-    },
-    devtool: "inline-source-map",
-    devServer: {
-        contentBase: "./dist",
-    },
-    plugins: [new HtmlWebpackPlugin({ title: "To-Do" })],
+    entry: "./src/index.js",
     output: {
-        filename: "[name].bundle.js",
         path: path.resolve(__dirname, "dist"),
-        clean: true,
+        filename: "js/bundle.js",
     },
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: "asset/resource",
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: "asset/resource",
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true,
+                            // options...
+                        },
+                    },
+                ],
             },
         ],
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "css/style.css",
+        }),
+    ],
 };

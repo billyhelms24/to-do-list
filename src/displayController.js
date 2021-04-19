@@ -4,15 +4,16 @@ const displayController = (() => {
     const renderHome = () => {
         const home = document.createElement("section");
         home.setAttribute("id", "home");
-        body.appendChild(home);
 
         const container = document.createElement("div");
         container.classList.add("container", "is-fluid");
-        home.appendChild(container);
 
         const columns = document.createElement("div");
         columns.classList.add("columns");
+
         container.appendChild(columns);
+        home.appendChild(container);
+        body.appendChild(home);
     };
 
     const clearTasks = () => {

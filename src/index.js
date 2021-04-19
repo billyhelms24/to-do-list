@@ -1,6 +1,4 @@
-import _ from "lodash";
-import "./bulma.css";
-import "./style.css";
+require("./style.scss");
 import { displayController } from "./displayController";
 import { taskManager } from "./taskManager";
 
