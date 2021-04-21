@@ -21,8 +21,8 @@ const taskManager = (() => {
         }
     }
 
-    const createTask = (title, desc, dueDate, priority) => {
-        new Task(title, desc, dueDate, priority);
+    const createTask = (title, desc, dueDate, priority, project) => {
+        new Task(title, desc, dueDate, priority, project);
     };
 
     const deleteTask = (e) => {
