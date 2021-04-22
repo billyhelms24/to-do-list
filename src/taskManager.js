@@ -1,5 +1,6 @@
 const taskManager = (() => {
     let taskLibrary = [];
+    let taskID = 0;
 
     const getTaskLibrary = () => {
         return taskLibrary;
@@ -16,6 +17,8 @@ const taskManager = (() => {
             } else {
                 this.project = "default";
             }
+            this.id = taskID;
+            taskID++;
             taskLibrary.push(this);
             console.log(taskLibrary);
         }
@@ -25,13 +28,9 @@ const taskManager = (() => {
         new Task(title, desc, dueDate, priority, project);
     };
 
-    const deleteTask = (e) => {
-        const card = e.target.closest("div");
+    const deleteTask = (elementID) => {
         taskLibrary.forEach((task) => {
-            if (
-                card.querySelector(".card-header-title").innerHTML ===
-                task.title
-            ) {
+            if (task.id == elementID) {
                 taskLibrary.splice(task, 1);
                 console.log(taskLibrary);
             }

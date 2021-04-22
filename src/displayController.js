@@ -1,9 +1,11 @@
+import { taskManager } from "./taskManager";
+
 const displayController = (() => {
     const body = document.querySelector("body");
 
     const renderHome = () => {
         const home = document.createElement("section");
-        home.classList.add("section");
+        home.classList.add("section", "has-background-link");
         home.setAttribute("id", "home");
 
         body.appendChild(home);
@@ -15,10 +17,10 @@ const displayController = (() => {
         const section = document.querySelector(".section");
 
         const container = document.createElement("div");
-        container.classList.add("container", "is-fluid");
+        container.classList.add("container", "is-max-desktop");
 
         const columns = document.createElement("div");
-        columns.classList.add("columns");
+        columns.classList.add("columns", "is-multiline");
         columns.setAttribute("id", "taskView");
 
         container.appendChild(columns);
@@ -39,10 +41,11 @@ const displayController = (() => {
 
         tasks.forEach((task) => {
             const column = document.createElement("div");
-            column.classList.add("column");
+            column.classList.add("column", "is-full");
 
             const card = document.createElement("div");
             card.classList.add("card");
+            card.id = task.id;
 
             const cardHeader = document.createElement("header");
             cardHeader.classList.add("card-header");
@@ -82,7 +85,9 @@ const displayController = (() => {
             taskDelete.classList.add("task-delete-btn");
             taskDelete.textContent = "Delete";
             taskDelete.addEventListener("click", (e) => {
-                e.target.closest("div").remove();
+                alert(e.target.closest(".card").id);
+                taskManager.deleteTask(e.target.closest(".card").id);
+                displayController.renderTasks(taskManager.getTaskLibrary());
             });
             cardFooter.appendChild(taskDelete);
 
