@@ -30,8 +30,13 @@ const taskManager = (() => {
 
     const deleteTask = (elementID) => {
         taskLibrary.forEach((task) => {
-            if (task.id == elementID) {
-                taskLibrary.splice(task, 1);
+            if (task.id === Number(elementID)) {
+                taskLibrary.splice(
+                    taskLibrary.findIndex(
+                        (task) => task.id === Number(elementID)
+                    ),
+                    1
+                );
                 console.log(taskLibrary);
             }
         });

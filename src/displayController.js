@@ -85,7 +85,6 @@ const displayController = (() => {
             taskDelete.classList.add("task-delete-btn");
             taskDelete.textContent = "Delete";
             taskDelete.addEventListener("click", (e) => {
-                alert(e.target.closest(".card").id);
                 taskManager.deleteTask(e.target.closest(".card").id);
                 displayController.renderTasks(taskManager.getTaskLibrary());
             });
