@@ -15,7 +15,7 @@ const taskManager = (() => {
             if (project) {
                 this.project = project;
             } else {
-                this.project = "default";
+                this.project = "inbox";
             }
             this.id = taskID;
             taskID++;
