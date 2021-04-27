@@ -18,19 +18,25 @@ const displayController = (() => {
 
         const container = document.createElement("div");
         container.classList.add("container", "is-max-desktop");
+        container.id = "taskView";
 
-        const columns = document.createElement("div");
-        columns.classList.add("columns", "is-multiline");
-        columns.setAttribute("id", "taskView");
+        const newTaskBtn = document.createElement("button");
+        newTaskBtn.classList.add(
+            "button",
+            "is-primary",
+            "mb-5",
+            "is-align-content"
+        );
+        newTaskBtn.textContent = "+";
 
-        container.appendChild(columns);
+        container.appendChild(newTaskBtn);
         section.appendChild(container);
     };
 
     const clearTasks = () => {
-        const columns = document.querySelectorAll(".column");
-        columns.forEach((column) => {
-            column.remove();
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.remove();
         });
     };
 
@@ -40,11 +46,8 @@ const displayController = (() => {
         const taskView = document.querySelector("#taskView");
 
         tasks.forEach((task) => {
-            const column = document.createElement("div");
-            column.classList.add("column", "is-full");
-
             const card = document.createElement("div");
-            card.classList.add("card");
+            card.classList.add("card", "mb-5");
             card.id = task.id;
 
             const cardHeader = document.createElement("header");
@@ -55,7 +58,7 @@ const displayController = (() => {
             cardHeaderTitle.textContent = task.title;
             cardHeader.appendChild(cardHeaderTitle);
 
-            card.appendChild(cardHeaderTitle);
+            card.appendChild(cardHeader);
 
             const cardContent = document.createElement("div");
             cardContent.classList.add("card-content");
@@ -92,8 +95,7 @@ const displayController = (() => {
 
             card.appendChild(cardFooter);
 
-            column.appendChild(card);
-            taskView.appendChild(column);
+            taskView.appendChild(card);
         });
     };
 
