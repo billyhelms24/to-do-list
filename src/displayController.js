@@ -1,4 +1,5 @@
 import { taskManager } from "./taskManager";
+import { formatDistance, subDays } from "date-fns";
 
 const displayController = (() => {
     const body = document.querySelector("body");
@@ -17,39 +18,101 @@ const displayController = (() => {
         const section = document.querySelector(".section");
 
         const container = document.createElement("div");
-        container.classList.add("container", "is-max-desktop", "is-clipped");
+        container.classList.add("container", "is-max-desktop");
         container.id = "taskView";
 
-        const newTaskBtn = document.createElement("button");
-        newTaskBtn.classList.add(
-            "button",
-            "is-danger",
-            "mb-5",
-            "is-align-content"
-        );
-        newTaskBtn.textContent = "+";
-        newTaskBtn.addEventListener("click", () => {
-            document.querySelector("#newTaskModal").classList.add("is-active");
-        });
-        container.appendChild(newTaskBtn);
+        const newTaskBtn = () => {
+            const btn = document.createElement("button");
+            btn.classList.add("button", "is-danger", "mb-5");
+            btn.textContent = "+";
+            btn.addEventListener("click", () => {
+                document
+                    .querySelector("#newTaskModal")
+                    .classList.add("is-active");
+            });
+            return btn;
+        };
 
-        const newTaskModal = document.createElement("div");
-        newTaskModal.classList.add("modal");
-        newTaskModal.id = "newTaskModal";
-        const newTaskModalBG = document.createElement("div");
-        newTaskModalBG.classList.add("modal-background");
-        newTaskModal.appendChild(newTaskModalBG);
-        const newTaskModalContent = document.createElement("div");
-        newTaskModalContent.classList.add("modal-content");
-        newTaskModal.appendChild(newTaskModalContent);
-        const newTaskModalClose = document.createElement("button");
-        newTaskModalClose.classList.add("modal-close", "is-large");
-        newTaskModalClose.setAttribute("aria-label", "close");
-        newTaskModalClose.addEventListener("click", (e) => {
-            e.target.closest(".modal").classList.remove("is-active");
-        });
-        newTaskModal.appendChild(newTaskModalClose);
-        container.appendChild(newTaskModal);
+        const newTaskModal = () => {
+            const modal = document.createElement("div");
+            modal.classList.add("modal");
+            modal.id = "newTaskModal";
+
+            const modalBackground = document.createElement("div");
+            modalBackground.classList.add("modal-background");
+
+            modal.appendChild(modalBackground);
+
+            const modalCard = document.createElement("div");
+            modalCard.classList.add("modal-card");
+
+            const modalCardHeader = document.createElement("header");
+            modalCardHeader.classList.add("modal-card-head");
+
+            const modalCardHeaderTitle = document.createElement("p");
+            modalCardHeaderTitle.classList.add("modal-card-title");
+            modalCardHeaderTitle.textContent = "New Task";
+
+            const modalCardClose = document.createElement("button");
+            modalCardClose.classList.add("delete");
+            modalCardClose.setAttribute("aria-label", "close");
+            modalCardClose.addEventListener("click", (e) => {
+                e.target.closest(".modal").classList.remove("is-active");
+            });
+
+            modalCardHeader.appendChild(modalCardHeaderTitle);
+            modalCardHeader.appendChild(modalCardClose);
+            modalCard.appendChild(modalCardHeader);
+
+            const modalCardBody = document.createElement("section");
+            modalCardBody.classList.add("modal-card-body");
+
+            const field1 = document.createElement("div");
+            field1.classList.add("field");
+
+            const label1 = document.createElement("label");
+            label1.classList.add("label");
+            label1.textContent = "Title";
+
+            const control1 = document.createElement("div");
+            control1.classList.add("control");
+
+            const input1 = document.createElement("input");
+            input1.classList.add("input");
+            input1.type = "text";
+            input1.placeholder = "Enter a task title...";
+
+            control1.appendChild(input1);
+            field1.appendChild(label1);
+            field1.appendChild(control1);
+            modalCardBody.appendChild(field1);
+
+            const field2 = document.createElement("div");
+            field2.classList.add("field");
+
+            const label2 = document.createElement("label");
+            label2.classList.add("label");
+            label2.textContent = "Description";
+
+            const control2 = document.createElement("div");
+            control2.classList.add("control");
+
+            const input2 = document.createElement("textarea");
+            input2.classList.add("textarea");
+            input2.placeholder = "Enter a task description...";
+
+            control2.appendChild(input2);
+            field2.appendChild(label2);
+            field2.appendChild(control2);
+            modalCardBody.appendChild(field2);
+            modalCard.appendChild(modalCardBody);
+            modal.appendChild(modalCard);
+
+            return modal;
+        };
+
+        container.appendChild(newTaskBtn());
+        container.appendChild(newTaskModal());
 
         section.appendChild(container);
     };
