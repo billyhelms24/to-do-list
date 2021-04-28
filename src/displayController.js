@@ -23,7 +23,7 @@ const displayController = (() => {
         const newTaskBtn = document.createElement("button");
         newTaskBtn.classList.add(
             "button",
-            "is-primary",
+            "is-danger",
             "mb-5",
             "is-align-content"
         );
@@ -61,6 +61,48 @@ const displayController = (() => {
             const cardHeaderIcon = document.createElement("a");
             cardHeaderIcon.classList.add("card-header-icon");
             cardHeaderIcon.setAttribute("aria-label", "more options");
+            cardHeaderIcon.addEventListener("click", (e) => {
+                if (
+                    e.target
+                        .closest(".card")
+                        .querySelector(".card-content")
+                        .classList.contains("is-hidden")
+                ) {
+                    e.target
+                        .closest(".card")
+                        .querySelector("i")
+                        .classList.remove("fa-chevron-left");
+                    e.target
+                        .closest(".card")
+                        .querySelector("i")
+                        .classList.add("fa-chevron-down");
+                    e.target
+                        .closest(".card")
+                        .querySelector(".card-content")
+                        .classList.remove("is-hidden");
+                    e.target
+                        .closest(".card")
+                        .querySelector("footer")
+                        .classList.remove("is-hidden");
+                } else {
+                    e.target
+                        .closest(".card")
+                        .querySelector("i")
+                        .classList.remove("fa-chevron-down");
+                    e.target
+                        .closest(".card")
+                        .querySelector("i")
+                        .classList.add("fa-chevron-left");
+                    e.target
+                        .closest(".card")
+                        .querySelector(".card-content")
+                        .classList.add("is-hidden");
+                    e.target
+                        .closest(".card")
+                        .querySelector("footer")
+                        .classList.add("is-hidden");
+                }
+            });
             const iconSpan = document.createElement("span");
             iconSpan.classList.add("icon");
             const icon = document.createElement("i");
@@ -100,7 +142,7 @@ const displayController = (() => {
             const taskDelete = document.createElement("a");
             taskDelete.classList.add("card-footer-item");
             taskDelete.classList.add("task-delete-btn");
-            taskDelete.textContent = "Delete";
+            taskDelete.textContent = "delete";
             taskDelete.addEventListener("click", (e) => {
                 taskManager.deleteTask(e.target.closest(".card").id);
                 displayController.renderTasks(taskManager.getTaskLibrary());
