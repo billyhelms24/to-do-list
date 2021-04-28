@@ -56,8 +56,21 @@ const displayController = (() => {
             const cardHeaderTitle = document.createElement("p");
             cardHeaderTitle.classList.add("card-header-title");
             cardHeaderTitle.textContent = task.title;
-            cardHeader.appendChild(cardHeaderTitle);
 
+            const cardHeaderIcon = document.createElement("a");
+            cardHeaderIcon.classList.add("card-header-icon");
+            cardHeaderIcon.setAttribute("aria-label", "more options");
+            const iconSpan = document.createElement("span");
+            iconSpan.classList.add("icon");
+            const icon = document.createElement("i");
+            icon.classList.add("fas", "fa-chevron-down");
+            icon.setAttribute("aria-hidden", "true");
+
+            iconSpan.appendChild(icon);
+            cardHeaderIcon.appendChild(iconSpan);
+
+            cardHeader.appendChild(cardHeaderTitle);
+            cardHeader.appendChild(cardHeaderIcon);
             card.appendChild(cardHeader);
 
             const cardContent = document.createElement("div");
