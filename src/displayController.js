@@ -17,7 +17,7 @@ const displayController = (() => {
         const section = document.querySelector(".section");
 
         const container = document.createElement("div");
-        container.classList.add("container", "is-max-desktop");
+        container.classList.add("container", "is-max-desktop", "is-clipped");
         container.id = "taskView";
 
         const newTaskBtn = document.createElement("button");
@@ -28,8 +28,29 @@ const displayController = (() => {
             "is-align-content"
         );
         newTaskBtn.textContent = "+";
-
+        newTaskBtn.addEventListener("click", () => {
+            document.querySelector("#newTaskModal").classList.add("is-active");
+        });
         container.appendChild(newTaskBtn);
+
+        const newTaskModal = document.createElement("div");
+        newTaskModal.classList.add("modal");
+        newTaskModal.id = "newTaskModal";
+        const newTaskModalBG = document.createElement("div");
+        newTaskModalBG.classList.add("modal-background");
+        newTaskModal.appendChild(newTaskModalBG);
+        const newTaskModalContent = document.createElement("div");
+        newTaskModalContent.classList.add("modal-content");
+        newTaskModal.appendChild(newTaskModalContent);
+        const newTaskModalClose = document.createElement("button");
+        newTaskModalClose.classList.add("modal-close", "is-large");
+        newTaskModalClose.setAttribute("aria-label", "close");
+        newTaskModalClose.addEventListener("click", (e) => {
+            e.target.closest(".modal").classList.remove("is-active");
+        });
+        newTaskModal.appendChild(newTaskModalClose);
+        container.appendChild(newTaskModal);
+
         section.appendChild(container);
     };
 
@@ -138,6 +159,14 @@ const displayController = (() => {
             taskPriority.classList.add("card-footer-item");
             taskPriority.textContent = task.priority;
             cardFooter.appendChild(taskPriority);
+
+            const taskEdit = document.createElement("a");
+            taskEdit.classList.add("card-footer-item");
+            taskEdit.textContent = "edit";
+            taskEdit.addEventListener("click", () => {
+                return;
+            });
+            cardFooter.appendChild(taskEdit);
 
             const taskDelete = document.createElement("a");
             taskDelete.classList.add("card-footer-item");
