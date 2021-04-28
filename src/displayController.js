@@ -53,9 +53,10 @@ const displayController = (() => {
             const cardHeader = document.createElement("header");
             cardHeader.classList.add("card-header");
 
-            const cardHeaderTitle = document.createElement("p");
-            cardHeaderTitle.classList.add("card-header-title");
-            cardHeaderTitle.textContent = task.title;
+            const cardHeaderTitle = document.createElement("label");
+            cardHeaderTitle.classList.add("card-header-title", "checkbox");
+            cardHeaderTitle.innerHTML =
+                "<input type='checkbox'> &nbsp" + task.title;
 
             const cardHeaderIcon = document.createElement("a");
             cardHeaderIcon.classList.add("card-header-icon");
