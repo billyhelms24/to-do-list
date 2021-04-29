@@ -146,6 +146,14 @@ const displayController = (() => {
             cardHeaderIcon.classList.add("card-header-icon");
             cardHeaderIcon.setAttribute("aria-label", "more options");
             cardHeaderIcon.addEventListener("click", (e) => {
+                document.querySelectorAll(".card").forEach((card) => {
+                    card.querySelector(".card-content").classList.add(
+                        "is-hidden"
+                    );
+                    card.querySelector("footer").classList.add("is-hidden");
+                    card.querySelector("i").classList.remove("fa-chevron-down");
+                    card.querySelector("i").classList.add("fa-chevron-left");
+                });
                 if (
                     e.target
                         .closest(".card")
@@ -190,7 +198,7 @@ const displayController = (() => {
             const iconSpan = document.createElement("span");
             iconSpan.classList.add("icon");
             const icon = document.createElement("i");
-            icon.classList.add("fas", "fa-chevron-down");
+            icon.classList.add("fas", "fa-chevron-left");
             icon.setAttribute("aria-hidden", "true");
 
             iconSpan.appendChild(icon);
@@ -201,7 +209,7 @@ const displayController = (() => {
             card.appendChild(cardHeader);
 
             const cardContent = document.createElement("div");
-            cardContent.classList.add("card-content");
+            cardContent.classList.add("card-content", "is-hidden");
 
             const content = document.createElement("content");
             content.classList.add("content");
@@ -211,7 +219,7 @@ const displayController = (() => {
             card.appendChild(cardContent);
 
             const cardFooter = document.createElement("footer");
-            cardFooter.classList.add("card-footer");
+            cardFooter.classList.add("card-footer", "is-hidden");
 
             const taskDueDate = document.createElement("p");
             taskDueDate.classList.add("card-footer-item");
