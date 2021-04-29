@@ -146,20 +146,24 @@ const displayController = (() => {
             cardHeaderIcon.classList.add("card-header-icon");
             cardHeaderIcon.setAttribute("aria-label", "more options");
             cardHeaderIcon.addEventListener("click", (e) => {
-                document.querySelectorAll(".card").forEach((card) => {
-                    card.querySelector(".card-content").classList.add(
-                        "is-hidden"
-                    );
-                    card.querySelector("footer").classList.add("is-hidden");
-                    card.querySelector("i").classList.remove("fa-chevron-down");
-                    card.querySelector("i").classList.add("fa-chevron-left");
-                });
                 if (
                     e.target
                         .closest(".card")
                         .querySelector(".card-content")
                         .classList.contains("is-hidden")
                 ) {
+                    document.querySelectorAll(".card").forEach((card) => {
+                        card.querySelector(".card-content").classList.add(
+                            "is-hidden"
+                        );
+                        card.querySelector("footer").classList.add("is-hidden");
+                        card.querySelector("i").classList.remove(
+                            "fa-chevron-down"
+                        );
+                        card.querySelector("i").classList.add(
+                            "fa-chevron-left"
+                        );
+                    });
                     e.target
                         .closest(".card")
                         .querySelector("i")
