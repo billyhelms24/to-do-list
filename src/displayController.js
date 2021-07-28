@@ -6,7 +6,7 @@ const displayController = (() => {
 
     const renderHome = () => {
         const home = document.createElement("section");
-        home.classList.add("section", "has-background-link");
+        home.classList.add("section", "has-background-link", "is-fullheight");
         home.setAttribute("id", "home");
 
         body.appendChild(home);
@@ -79,6 +79,7 @@ const displayController = (() => {
 
             const input1 = document.createElement("input");
             input1.classList.add("input");
+            input1.id = "newTitle";
             input1.type = "text";
             input1.placeholder = "Enter a task title...";
 
@@ -99,13 +100,123 @@ const displayController = (() => {
 
             const input2 = document.createElement("textarea");
             input2.classList.add("textarea");
+            input2.id = "newDesc";
             input2.placeholder = "Enter a task description...";
 
             control2.appendChild(input2);
             field2.appendChild(label2);
             field2.appendChild(control2);
             modalCardBody.appendChild(field2);
+
+            const field3 = document.createElement("div");
+            field3.classList.add("field");
+
+            const label3 = document.createElement("label");
+            label3.classList.add("label");
+            label3.textContent = "Due Date";
+
+            const control3 = document.createElement("div");
+            control3.classList.add("control");
+
+            const input3 = document.createElement("input");
+            input3.classList.add("input");
+            input3.id = "newDueDate";
+            input3.type = "text";
+            input3.placeholder = "Enter a due date... (MM/DD/YY)";
+
+            control3.appendChild(input3);
+            field3.appendChild(label3);
+            field3.appendChild(control3);
+            modalCardBody.appendChild(field3);
+
+            const field4 = document.createElement("div");
+            field4.classList.add("field");
+
+            const label4 = document.createElement("label");
+            label4.classList.add("label");
+            label4.textContent = "Priority";
+
+            const selectDiv4 = document.createElement("div");
+            selectDiv4.classList.add("select");
+
+            const select4 = document.createElement("select");
+            select4.id = "newPriority";
+
+            const option41 = document.createElement("option");
+            option41.textContent = "none";
+
+            const option42 = document.createElement("option");
+            option42.textContent = "low";
+
+            const option43 = document.createElement("option");
+            option43.textContent = "medium";
+
+            const option44 = document.createElement("option");
+            option44.textContent = "high";
+
+            select4.appendChild(option41);
+            select4.appendChild(option42);
+            select4.appendChild(option43);
+            select4.appendChild(option44);
+            selectDiv4.appendChild(select4);
+            field4.appendChild(label4);
+            field4.appendChild(selectDiv4);
+            modalCardBody.appendChild(field4);
+
+            const field5 = document.createElement("div");
+            field5.classList.add("field");
+
+            const label5 = document.createElement("label");
+            label5.classList.add("label");
+            label5.textContent = "Project";
+
+            const selectDiv5 = document.createElement("div");
+            selectDiv5.classList.add("select");
+
+            const select5 = document.createElement("select");
+            select5.id = "newProject";
+
+            const option51 = document.createElement("option");
+            option51.textContent = "inbox";
+
+            select5.appendChild(option51);
+            selectDiv5.appendChild(select5);
+            field5.appendChild(label5);
+            field5.appendChild(selectDiv5);
+            modalCardBody.appendChild(field5);
+
             modalCard.appendChild(modalCardBody);
+
+            const modalCardFooter = document.createElement("footer");
+            modalCardFooter.classList.add("modal-card-foot");
+            const button1 = document.createElement("button");
+            button1.classList.add("button", "is-success");
+            button1.textContent = "Create Task";
+            button1.addEventListener("click", (e) => {
+                if (
+                    document.getElementById("newTitle").value !== "" &&
+                    document.getElementById("newDesc").value !== "" &&
+                    document.getElementById("newDueDate").value !== ""
+                ) {
+                    taskManager.createTask(
+                        document.getElementById("newTitle").value,
+                        document.getElementById("newDesc").value,
+                        document.getElementById("newDueDate").value,
+                        document.getElementById("newPriority").value,
+                        document.getElementById("newProject").value
+                    );
+                    renderTasks(taskManager.getTaskLibrary());
+                    e.target.closest(".modal").classList.remove("is-active");
+                } else {
+                    alert(
+                        "To create a new task, the following is required: Title, Description, and Due Date"
+                    );
+                }
+            });
+
+            modalCardFooter.appendChild(button1);
+            modalCard.appendChild(modalCardFooter);
+
             modal.appendChild(modalCard);
 
             return modal;
